@@ -45,7 +45,7 @@ class RegisterRequest extends FormRequest
             'email.unique' => 'Email deja inregistrat',
             'password.required' => 'Parola obligatorie',
             'password.min' => 'Parola trebuie sa aiba un minim de :min caractere',
-            'password.confirmed' => 'Parola difera de confirmare'
+            'password.confirmed' => 'Parolele nu se potrivesc'
         ];
     }
 }
