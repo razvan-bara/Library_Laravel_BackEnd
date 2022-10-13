@@ -13,7 +13,7 @@ class RegisterRequest extends FormRequest
     {
     throw new HttpResponseException(response()->json([
         'success'   => false,
-        'message'   => 'Validation errors',
+        'message'   => 'Erori la creeare unui cont nou',
         'data'      => $validator->errors()
     ],Response::HTTP_FORBIDDEN));
     }

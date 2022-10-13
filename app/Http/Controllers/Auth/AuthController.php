@@ -24,14 +24,19 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
 
-        $token = $user->createToken('main')->plainTextToken;
+        $token = Str::random(32);
 
         return response()->json([
-            'user' => [ 
-                'fullname' => $user->getFullName(),
-                'email' => $user->email
-            ],
-            'token' => $token
+            'success' => true,
+            'message' => 'User creeat cu succes',
+            'data'      => [
+                'user' => [ 
+                    'first_name' => $user->first_name,
+                    'last_name' => $user->last_name,
+                    'email' => $user->email,
+                ],
+                'token' => $token
+                ],    
             ]
         ,Response::HTTP_CREATED);
     }
