@@ -7,7 +7,7 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Contracts\Validation\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class RegisterRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     public function failedValidation(Validator $validator)
     {
@@ -26,25 +26,19 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => 'required|string|regex:/^[a-zA-ZăâîșțĂÂÎȘȚ]+$/',
-            'last_name' => 'required|string||regex:/^[a-zA-ZăâîșțĂÂÎȘȚ]+$/',
-            'email' => 'required|email|string|unique:users,email',
-            'password' => 'required|confirmed|min:8'
+            'email' => 'required|email|string|exists:users,email',
+            'password' => 'required|max:40'
         ];
     }
 
     public function messages()
     {
         return [
-            'first_name.regex' => 'Prenumele poate contine doar litere',
-            'last_name.regex' => 'Numele poate contine doar litere',
-            'first_name.required' => 'Prenume obligatoriu',
-            'last_name.required' => 'Nume obligatoriu',
             'email.required' => 'Email obligatoriu',
             'email.email' => 'Nu este un email valid',
-            'email.unique' => 'Email deja inregistrat',
+            'email.exists' => 'Email necunoscut',
             'password.required' => 'Parola obligatorie',
-            'password.min' => 'Parola trebuie sa aiba un minim de :min caractere',
+            'password.max' => 'Parola depaseste numarul de caractere permis',
             'password.confirmed' => 'Parolele nu se potrivesc'
         ];
     }
